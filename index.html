@@ -32,6 +32,12 @@
 <span class="description"><%= description %></span><br>
 =><%= tags %>
 
+<ul>
+  <% _.each(tags, function(tag){ %>
+    <li><%= tag %></li>
+  <% }); %>
+</ul>
+
 </script>
 
 <script type="text/template" id="tags-template">

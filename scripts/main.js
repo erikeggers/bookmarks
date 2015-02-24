@@ -17,9 +17,23 @@ var BookmarkItemsCollection = Backbone.Collection.extend({
 
   url: "https://api.parse.com/1/classes/bookmarks",
 
-parse: function(response){
-  console.log(response);
-  return response.results;
+  parse: function(response){
+    console.log(response);
+    return response.results;
+  },
+
+  getTags: function(){
+    return _.chain(this.pluck('tags'))
+    .flatten()
+    .uniq()
+    .value();
+  },
+
+  getAsyncTags: function(){
+    var self = this;
+    return this.fetch().done(function(){
+      return self.getTags();
+    });
   }
 });
 
